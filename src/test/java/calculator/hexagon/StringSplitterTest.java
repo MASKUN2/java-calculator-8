@@ -9,25 +9,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StringSplitterTest {
 
     @Test
-    void 문자열을_구분자로_나눈다() {
-        Splitter splitter = new StringSplitter();
-        String input = "1,2";
-        String delimiter = ",";
+    void 기본구분자로_문자열_분리한다() {
+        String input = "1,2:3";
 
-        List<String> result = splitter.split(input, delimiter);
-        assertThat(result.size()).isEqualTo(2);
+        Splitter splitter = new StringSplitter();
+        List<String> result = splitter.defaultSplit(input);
+
+        assertThat(result.size()).isEqualTo(3);
         assertThat(result.get(0)).isEqualTo("1");
         assertThat(result.get(1)).isEqualTo("2");
+        assertThat(result.get(2)).isEqualTo("3");
     }
 
     @Test
-    void 빈문자열을_나누면_1개를_반환한다() {
-        Splitter splitter = new StringSplitter();
+    void 기본구분자로_빈문자열_분리한다() {
         String input = "";
-        String delimiter = ",";
 
-        List<String> result = splitter.split(input, delimiter);
+        Splitter splitter = new StringSplitter();
+        List<String> result = splitter.defaultSplit(input);
+
         assertThat(result.size()).isEqualTo(1);
-        assertThat(result.get(0)).isEqualTo("");
+        assertThat(result.getFirst()).isEqualTo("");
     }
 }

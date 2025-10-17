@@ -1,8 +1,10 @@
 package calculator.hexagon;
 
 import java.util.List;
+import java.util.Set;
 
 public interface Splitter {
+    Set<String> DEFAULT_DELIMITERS = Set.of(",", ":");
 
-    List<String> split(String input, String delimiter);
+    List<String> defaultSplit(String input);
 }

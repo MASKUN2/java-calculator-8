@@ -5,7 +5,12 @@ import java.util.List;
 public class StringSplitter implements Splitter {
 
     @Override
-    public List<String> split(String input, String delimiter) {
-        return List.of(input.split(delimiter));
+    public List<String> defaultSplit(String input) {
+        String[] parts = input.split(defaultDelimiterRegex());
+        return List.of(parts);
+    }
+
+    private String defaultDelimiterRegex() {
+        return String.join("|", Splitter.DEFAULT_DELIMITERS);
     }
 }
