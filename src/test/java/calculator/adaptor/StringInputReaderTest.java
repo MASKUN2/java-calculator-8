@@ -32,7 +32,6 @@ public class StringInputReaderTest {
         SystemInputTestHelper.setInput(input);
 
         String read = reader.read();
-        String read2 = reader.read();
 
         assertThat(read).isEqualTo(input);
     }
