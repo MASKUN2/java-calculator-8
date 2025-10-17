@@ -37,3 +37,29 @@
     - 기능 (Function): 개발자 관점의 기술적 구현 단위. **'어떤 인자를 받고', '어떤 값을 반환하며', '내부에서 어떤 로직을 수행하는지'**에 대한 **저수준(Low-Level)**의 디테일.
 - 이후 이 분류를 체득하는데 시간이 들었고 기존 기능 목록을 지우고 처음부터 다시 작성하였다.
 - 기능 (Feature)을 작성하며 너무 지나치게 추상화되지 않고 각 단위마다 커밋이 가능한 레벨로 작성했다. 
+
+---
+**기본 구현 camp.nextstep.edu.missionutils.test.NsTest 에 대한 의문**
+
+```java
+    private void command(final String... args) {
+    final byte[] buf = String.join("\n", args).getBytes();
+    System.setIn(new ByteArrayInputStream(buf));
+}
+```
+
+- 해당 클래스의 command 메서드는 사용자의 입력을 모사하는 기능이다.
+- camp.nextstep.edu.missionutils.Console 의 readLine() 은 내부적으로 java.util.Scanner의 nextLine()메서드를 사용한다.
+- 만약 NsTest.command("") 와 같이 빈문자열 하나가 인자로 전달되면 Console.readLine()은 NoSuchElementException을 던지게 된다.
+- 왜냐면 Scanner는 내부적으로 입력스트림이 닫혀있는 경우(스트림 길이가 0에도 해당) NoSuchElementException 을 던지기 때문이다.
+- 하지만 실제 사용자가 콘솔에 입력을 하는 상황은 ""와 같이 빈문자가 전달되지 않는다. 엔터를 눌러 전송하기 때문에 반드시 입력문자열끝에 개행문자"\n"이 추가되게 된다.
+- 즉 NsTest.command("")는 실제 사용자의 입력을 모사하지 못한다.
+- 이점은 빈문자열이 전송되는 테스트를 구상하는데 조금 어려운 점이었다. 요구사항에는 다음과 같이 적혀있다.
+
+> 기능 요구 사항
+> 입력한 문자열에서 숫자를 추출하여 더하는 계산기를 구현한다.
+> 쉼표(,) 또는 콜론(:)을 구분자로 가지는 문자열을 전달하는 경우 구분자를 기준으로 분리한 각 숫자의 합을 반환한다.
+> 예: "" => 0, "1,2" => 3, "1,2,3" => 6, "1,2:3" => 6
+
+- 즉 예시의 첫번째 사례인 `"" => 0` 은 NsTest.command("")를 통해서는 정상적으로 재현할 수 없다.
+- 따라서 나는 Console.readLine() 에서 NoSuchElementException 생겼을 때에 예외를 복구처리하여 ""을 대신 리턴하도록 설계하였다.
