@@ -31,8 +31,9 @@
 | 11 | 5     | 예외 복구 | "" 입력을 0으로 처리         | handle empty String input for "0"            |                                             | 예          |
 | 12 | 4     | 오류    | 잘못된 커스텀 구분자 선언에 대한 오류 | error for wrong custom delimiter declaration | 선언 불가능 함 = [`.`, `/n`, `숫자`]                | 아니오        |
 | 13 | 4     | 예외 복구 | 중복 구분자 무시 처리          | ignore duplicated delimiter                  |                                             | 아니오        |
-| 14 | 5     | 오류    | 양수가 아닌 숫자에 대한 오류      | error for negative numbers                   |                                             | 아니오        |
+| 14 | 5     | 오류    | 양수가 아닌 숫자에 대한 오류      | error for negative numbers                   |                                             | 예          |
 | 15 | 5     | 오류    | 숫자가 아닌 입력에 대한 오류      | error for non-numeric parts                  |                                             | 예          |
+| 16 | 5     | 오류    | 정수가 아닌 입력에 대한 오류      | error for non-integer parts                  |                                             | 아니오        |
 
 ## 회고
 
