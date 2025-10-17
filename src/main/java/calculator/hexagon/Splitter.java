@@ -7,4 +7,6 @@ public interface Splitter {
     Set<String> DEFAULT_DELIMITERS = Set.of(",", ":");
 
     List<String> defaultSplit(String input);
+
+    List<String> splitWithCustomDelimiter(String input, String customDelimiter);
 }
