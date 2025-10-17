@@ -25,8 +25,7 @@
 | 3  | 2     | 처리    | 기본 구분자 지원             | support default delimiters                   | `,` 와 `:`                                   | 예          |
 | 4  | 2     | 처리    | 커스텀 구분자 선언 지원         | support custom delimiter declaration         | 문자열 앞부분의 `//`와 `\n` 사이에 선언                  | 예          |
 | 5  |       | 처리    | 문자열 숫자 변환             | string to numbers parsing                    |                                             | 예          |
-| 6  | 5     | 처리    | 숫자 정수 지원              | support integer number                       |                                             | 예          |
-| 7  |       | 계산    | 숫자 덧셈                 | calculate sum of numbers                     |                                             | 예          |
+| 7  |       | 계산    | 정수 덧셈                 | sum integers                                 |                                             | 예          |
 | 9  |       | 출력    | 결과를 출력하기              | print result                                 | 계산 결과를 출력한다                                 | 예          |
 | 10 | 1     | 오류    | 잘못된 입력에 의한 오류         | error for wrong input                        | IllegalArgumentException을 발생시킨 후 애플리케이션은 종료 | 예          |
 | 11 | 5     | 예외 복구 | "" 입력을 0으로 처리         | handle empty String input for "0"            |                                             | 예          |
