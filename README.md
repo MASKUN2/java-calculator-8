@@ -30,7 +30,7 @@
 | 8  |       | 출력    | 출력 포맷 설정                      | set up print format                           |                                             | 아니오        |
 | 9  |       | 출력    | 결과를 출력하기                      | print result                                  | 계산 결과를 출력한다                                 | 예          |
 | 10 | 1     | 오류    | 잘못된 입력에 의한 오류                 | error for wrong input                         | IllegalArgumentException을 발생시킨 후 애플리케이션은 종료 | 예          |
-| 11 | 1     | 예외 복구 | "" 입력을 0으로 처리                 | handle empty String input for "0"             |                                             | 예          |
+| 11 | 5     | 예외 복구 | "" 입력을 0으로 처리                 | handle empty String input for "0"             |                                             | 예          |
 | 12 | 4     | 오류    | 잘못된 커스텀 구분자 선언에 대한 오류         | error for wrong custom delimiter declaration  | 선언 불가능 함 = [`.`, `/n`, `숫자`]                | 아니오        |
 | 13 | 4     | 예외 복구 | 커스텀 구분자가 기본 구분자와 겹치는 경우 무시 처리 | ignore custom delimiter equals to any default |                                             | 아니오        |
 | 14 | 5     | 오류    | 양수가 아닌 숫자에 대한 오류              | error for negative numbers                    |                                             | 아니오        |
