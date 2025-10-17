@@ -35,3 +35,7 @@
 | 13 | 4     | 예외 복구 | 커스텀 구분자가 기본 구분자와 겹치는 경우 무시 처리 | ignore custom delimiter equals to any default |                                             | 아니오        |
 | 14 | 5     | 오류    | 양수가 아닌 숫자에 대한 오류              | error for negative numbers                    |                                             | 아니오        |
 | 15 | 5     | 오류    | 숫자가 아닌 입력에 대한 오류              | error for non-numeric parts                   |                                             | 예          |
+
+## 회고
+
+소감문 : [reaction_paper.md](docs/reaction_paper.md)
