@@ -46,4 +46,20 @@ public class StringSplitterTest {
         assertThat(result.get(2)).isEqualTo("3");
         assertThat(result.get(3)).isEqualTo("0");
     }
+
+
+    @Test
+    void 커스텀_구분자가_기본구분자와_겹치므로_무시한다() {
+        String input = "1,2:3";
+        String customDelimiter = ":";
+
+        Splitter splitter = new StringSplitter();
+        List<String> result = splitter.splitWithCustomDelimiter(input, customDelimiter);
+
+        assertThat(result.size()).isEqualTo(3);
+        assertThat(result.getFirst()).isEqualTo("1");
+        assertThat(result.get(1)).isEqualTo("2");
+        assertThat(result.get(2)).isEqualTo("3");
+
+    }
 }
