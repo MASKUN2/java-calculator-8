@@ -1,17 +1,21 @@
 package calculator.hexagon.application;
 
 import calculator.adaptor.StringInputReader;
-import calculator.hexagon.domain.*;
+import calculator.hexagon.domain.Calculator;
+import calculator.hexagon.domain.CustomDelimiterDeclarer;
+import calculator.hexagon.domain.DelimiterValidator;
+import calculator.hexagon.domain.NumberParser;
+import calculator.hexagon.domain.PositiveNumberValidator;
+import calculator.hexagon.domain.Splitter;
 import calculator.hexagon.domain.model.SeparatedInput;
 import calculator.hexagon.in.StringSumCalculator;
-import calculator.hexagon.out.Instructor;
+import calculator.hexagon.out.InputInstructor;
 import calculator.hexagon.out.ResultPrinter;
-
 import java.util.List;
 import java.util.Optional;
 
 public class StringSumCalculatorImpl implements StringSumCalculator {
-    private final Instructor instructor;
+    private final InputInstructor instructor;
     private final StringInputReader stringInputReader;
     private final ResultPrinter IntResultPrinter;
     private final CustomDelimiterDeclarer customDelimiterDeclarer;
@@ -24,7 +28,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     private String input = "";
     private int result = 0;
 
-    public StringSumCalculatorImpl(Instructor instructor,
+    public StringSumCalculatorImpl(InputInstructor instructor,
                                    StringInputReader stringInputReader,
                                    CustomDelimiterDeclarer customDelimiterDeclarer,
                                    DelimiterValidator delimiterValidator,
@@ -48,7 +52,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
 
     @Override
     public void printWelcome() {
-        instructor.print();
+        instructor.display();
     }
 
     @Override
