@@ -1,6 +1,6 @@
 package calculator.adaptor;
 
-import calculator.hexagon.required.Instructor;
+import calculator.hexagon.out.Instructor;
 
 public class RunInstructor implements Instructor {
     @Override

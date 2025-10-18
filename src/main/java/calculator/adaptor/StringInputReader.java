@@ -1,6 +1,6 @@
 package calculator.adaptor;
 
-import calculator.hexagon.required.SystemInputReader;
+import calculator.hexagon.out.SystemInputReader;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.NoSuchElementException;

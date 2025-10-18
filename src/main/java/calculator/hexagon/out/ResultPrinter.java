@@ -1,4 +1,4 @@
-package calculator.hexagon.required;
+package calculator.hexagon.out;
 
 public interface ResultPrinter {
     void print(int result);

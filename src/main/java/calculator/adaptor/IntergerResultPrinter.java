@@ -1,6 +1,6 @@
 package calculator.adaptor;
 
-import calculator.hexagon.required.ResultPrinter;
+import calculator.hexagon.out.ResultPrinter;
 
 public class IntergerResultPrinter implements ResultPrinter {
     @Override

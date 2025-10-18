@@ -1,4 +1,4 @@
-package calculator.hexagon.provided;
+package calculator.hexagon.in;
 
 public interface StringSumCalculator {
     void printWelcome();

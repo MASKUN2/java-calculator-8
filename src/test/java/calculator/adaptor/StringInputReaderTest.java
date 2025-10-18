@@ -1,7 +1,7 @@
 package calculator.adaptor;
 
 import calculator.helper.SystemInputTestHelper;
-import calculator.hexagon.required.SystemInputReader;
+import calculator.hexagon.out.SystemInputReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

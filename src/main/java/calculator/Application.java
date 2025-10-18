@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.hexagon.provided.StringSumCalculator;
+import calculator.hexagon.in.StringSumCalculator;
 
 public class Application {
     public static void main(String[] args) {

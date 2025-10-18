@@ -1,6 +1,6 @@
 package calculator;
 
-import calculator.hexagon.provided.StringSumCalculator;
+import calculator.hexagon.in.StringSumCalculator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

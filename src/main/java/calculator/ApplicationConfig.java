@@ -5,7 +5,7 @@ import calculator.adaptor.RunInstructor;
 import calculator.adaptor.StringInputReader;
 import calculator.hexagon.application.StringSumCalculatorImpl;
 import calculator.hexagon.domain.*;
-import calculator.hexagon.provided.StringSumCalculator;
+import calculator.hexagon.in.StringSumCalculator;
 
 public class ApplicationConfig {
 

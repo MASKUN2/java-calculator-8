@@ -3,9 +3,9 @@ package calculator.hexagon.application;
 import calculator.adaptor.StringInputReader;
 import calculator.hexagon.domain.*;
 import calculator.hexagon.domain.model.SeparatedInput;
-import calculator.hexagon.provided.StringSumCalculator;
-import calculator.hexagon.required.Instructor;
-import calculator.hexagon.required.ResultPrinter;
+import calculator.hexagon.in.StringSumCalculator;
+import calculator.hexagon.out.Instructor;
+import calculator.hexagon.out.ResultPrinter;
 
 import java.util.List;
 import java.util.Optional;
