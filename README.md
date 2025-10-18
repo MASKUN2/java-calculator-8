@@ -37,6 +37,7 @@
 | 15 | 5     | 오류    | 숫자가 아닌 입력에 대한 오류      | error for non-numeric parts                  |                                             | 예          |
 | 16 | 5     | 오류    | 정수가 아닌 입력에 대한 오류      | error for non-integer parts                  |                                             | 아니오        |
 | 17 |       | 출력    | 실행시 설명 출력             | show instruction                             | "덧셈할 문자열을 입력해 주세요." 출력                      | 아니오        |
+| 18 | 2     | 처리    | 구분자 선언부와 숫자 선언부 분리    | isolate delimiter declaration                |                                             |            |
 
 ## 회고
 
