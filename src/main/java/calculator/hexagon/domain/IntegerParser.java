@@ -7,6 +7,14 @@ public class IntegerParser implements NumberParser {
         if (input.isEmpty()) {
             return 0;
         }
-        return Integer.parseInt(input);
+        return parseToInt(input);
+    }
+
+    private static int parseToInt(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("정수만 입력 가능합니다", e);
+        }
     }
 }
