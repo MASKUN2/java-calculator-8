@@ -1,4 +1,4 @@
-package calculator.hexagon;
+package calculator.hexagon.domain;
 
 import org.junit.jupiter.api.Test;
 
