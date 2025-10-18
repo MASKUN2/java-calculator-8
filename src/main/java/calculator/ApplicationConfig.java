@@ -1,8 +1,6 @@
 package calculator;
 
-import calculator.adaptor.IntergerResultPrinter;
-import calculator.adaptor.StringInputReader;
-import calculator.adaptor.SystemInputInstructor;
+import calculator.adaptor.CalculatorController;
 import calculator.hexagon.application.StringSumCalculatorImpl;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
 import calculator.hexagon.domain.DelimiterValidator;
@@ -16,15 +14,13 @@ public class ApplicationConfig {
 
     public StringSumCalculator stringSumCalculator() {
         return new StringSumCalculatorImpl(
-                new SystemInputInstructor(),
-                new StringInputReader(),
+                new CalculatorController(),
                 new CustomDelimiterDeclarer(),
                 new DelimiterValidator(),
                 new StringSplitter(),
                 new IntegerParser(),
                 new PositiveIntegerValidator(),
-                new IntegerCalculator(),
-                new IntergerResultPrinter()
+                new IntegerCalculator()
         );
     }
 }

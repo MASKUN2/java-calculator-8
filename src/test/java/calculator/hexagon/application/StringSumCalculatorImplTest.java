@@ -2,9 +2,7 @@ package calculator.hexagon.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.adaptor.IntergerResultPrinter;
-import calculator.adaptor.StringInputReader;
-import calculator.adaptor.SystemInputInstructor;
+import calculator.adaptor.CalculatorController;
 import calculator.helper.SystemInputTestHelper;
 import calculator.helper.SystemOutputTestHelper;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
@@ -25,15 +23,13 @@ public class StringSumCalculatorImplTest {
         SystemOutputTestHelper.record();
 
         calculator = new StringSumCalculatorImpl(
-                new SystemInputInstructor(),
-                new StringInputReader(),
+                new CalculatorController(),
                 new CustomDelimiterDeclarer(),
                 new DelimiterValidator(),
                 new StringSplitter(),
                 new IntegerParser(),
                 new PositiveIntegerValidator(),
-                new IntegerCalculator(),
-                new IntergerResultPrinter()
+                new IntegerCalculator()
         );
     }
 

@@ -1,6 +1,5 @@
 package calculator.hexagon.application;
 
-import calculator.adaptor.StringInputReader;
 import calculator.hexagon.domain.Calculator;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
 import calculator.hexagon.domain.DelimiterValidator;
@@ -9,15 +8,12 @@ import calculator.hexagon.domain.PositiveNumberValidator;
 import calculator.hexagon.domain.Splitter;
 import calculator.hexagon.domain.model.SeparatedInput;
 import calculator.hexagon.in.StringSumCalculator;
-import calculator.hexagon.out.InputInstructor;
-import calculator.hexagon.out.ResultPrinter;
+import calculator.hexagon.out.CalculatorUi;
 import java.util.List;
 import java.util.Optional;
 
 public class StringSumCalculatorImpl implements StringSumCalculator {
-    private final InputInstructor instructor;
-    private final StringInputReader stringInputReader;
-    private final ResultPrinter IntResultPrinter;
+    private final CalculatorUi ui;
     private final CustomDelimiterDeclarer customDelimiterDeclarer;
     private final DelimiterValidator delimiterValidator;
     private final Splitter splitter;
@@ -28,19 +24,16 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     private String input = "";
     private int result = 0;
 
-    public StringSumCalculatorImpl(InputInstructor instructor,
-                                   StringInputReader stringInputReader,
-                                   CustomDelimiterDeclarer customDelimiterDeclarer,
-                                   DelimiterValidator delimiterValidator,
-                                   Splitter splitter,
-                                   NumberParser numberParser,
-                                   PositiveNumberValidator positiveNumberValidator,
-                                   Calculator calculator,
-                                   ResultPrinter IntResultPrinter
+    public StringSumCalculatorImpl(
+            CalculatorUi ui,
+            CustomDelimiterDeclarer customDelimiterDeclarer,
+            DelimiterValidator delimiterValidator,
+            Splitter splitter,
+            NumberParser numberParser,
+            PositiveNumberValidator positiveNumberValidator,
+            Calculator calculator
     ) {
-        this.instructor = instructor;
-        this.stringInputReader = stringInputReader;
-        this.IntResultPrinter = IntResultPrinter;
+        this.ui = ui;
         this.customDelimiterDeclarer = customDelimiterDeclarer;
         this.delimiterValidator = delimiterValidator;
         this.splitter = splitter;
@@ -53,8 +46,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     @Override
     public void readInput() {
         this.result = 0;
-        instructor.display();
-        this.input = stringInputReader.read();
+        this.input = ui.readInput();
     }
 
     @Override
@@ -68,7 +60,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
 
     @Override
     public void printResult() {
-        IntResultPrinter.print(result);
+        ui.printResult(result);
     }
 
     private List<String> split(SeparatedInput separated) {
