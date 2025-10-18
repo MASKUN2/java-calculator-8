@@ -1,5 +1,6 @@
 package calculator.hexagon.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,12 +8,17 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringSplitterTest {
+    private StringSplitter splitter;
+
+    @BeforeEach
+    void setUp() {
+        splitter = new StringSplitter();
+    }
 
     @Test
     void 기본구분자로_문자열_분리한다() {
         String input = "1,2:3";
 
-        Splitter splitter = new StringSplitter();
         List<String> result = splitter.defaultSplit(input);
 
         assertThat(result.size()).isEqualTo(3);
@@ -25,7 +31,6 @@ public class StringSplitterTest {
     void 기본구분자로_빈문자열_분리한다() {
         String input = "";
 
-        Splitter splitter = new StringSplitter();
         List<String> result = splitter.defaultSplit(input);
 
         assertThat(result.size()).isEqualTo(1);
@@ -37,7 +42,6 @@ public class StringSplitterTest {
         String input = "1,2:3;0";
         String customDelimiter = ";";
 
-        Splitter splitter = new StringSplitter();
         List<String> result = splitter.splitWithCustomDelimiter(input, customDelimiter);
 
         assertThat(result.size()).isEqualTo(4);
@@ -53,7 +57,6 @@ public class StringSplitterTest {
         String input = "1,2:3";
         String customDelimiter = ":";
 
-        Splitter splitter = new StringSplitter();
         List<String> result = splitter.splitWithCustomDelimiter(input, customDelimiter);
 
         assertThat(result.size()).isEqualTo(3);
