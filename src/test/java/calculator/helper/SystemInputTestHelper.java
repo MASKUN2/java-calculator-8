@@ -1,8 +1,11 @@
 package calculator.helper;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 public class SystemInputTestHelper {
+    private static final InputStream STANDARD_IN = System.in;
+
     private SystemInputTestHelper() {
     }
 
@@ -13,6 +16,10 @@ public class SystemInputTestHelper {
 
         ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
+    }
+
+    public static void restore() {
+        System.setIn(STANDARD_IN);
     }
 
 }
