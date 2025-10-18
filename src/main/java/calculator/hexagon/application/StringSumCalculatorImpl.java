@@ -18,6 +18,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     private final DelimiterValidator delimiterValidator;
     private final Splitter splitter;
     private final NumberParser numberParser;
+    private final PositiveNumberValidator positiveNumberValidator;
     private final Calculator calculator;
 
     private String input = "";
@@ -29,6 +30,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
                                    DelimiterValidator delimiterValidator,
                                    Splitter splitter,
                                    NumberParser numberParser,
+                                   PositiveNumberValidator positiveNumberValidator,
                                    Calculator calculator,
                                    ResultPrinter IntResultPrinter
     ) {
@@ -39,6 +41,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
         this.delimiterValidator = delimiterValidator;
         this.splitter = splitter;
         this.numberParser = numberParser;
+        this.positiveNumberValidator = positiveNumberValidator;
         this.calculator = calculator;
 
     }
@@ -59,7 +62,13 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
         SeparatedInput separated = customDelimiterDeclarer.separate(input);
         List<String> parts = split(separated);
         List<Integer> integers = parse(parts);
+        validateNumber(integers);
         result = calculator.sum(integers);
+    }
+
+    @Override
+    public void printResult() {
+        IntResultPrinter.print(result);
     }
 
     private List<String> split(SeparatedInput separated) {
@@ -84,8 +93,9 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
                 .toList();
     }
 
-    @Override
-    public void printResult() {
-        IntResultPrinter.print(result);
+    private void validateNumber(List<Integer> integers) {
+        for (Integer number : integers) {
+            positiveNumberValidator.check(number);
+        }
     }
 }

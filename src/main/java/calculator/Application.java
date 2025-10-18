@@ -1,7 +1,14 @@
 package calculator;
 
+import calculator.hexagon.provided.StringSumCalculator;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        ApplicationConfig config = new ApplicationConfig();
+        StringSumCalculator calculator = config.stringSumCalculator();
+        calculator.printWelcome();
+        calculator.readInput();
+        calculator.sum();
+        calculator.printResult();
     }
 }

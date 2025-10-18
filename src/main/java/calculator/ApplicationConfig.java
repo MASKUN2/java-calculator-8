@@ -17,6 +17,7 @@ public class ApplicationConfig {
                 new DelimiterValidator(),
                 new StringSplitter(),
                 new IntegerParser(),
+                new PositiveIntegerValidator(),
                 new IntegerCalculator(),
                 new IntergerResultPrinter()
         );
