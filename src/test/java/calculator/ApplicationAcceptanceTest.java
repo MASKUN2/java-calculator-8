@@ -104,5 +104,14 @@ public class ApplicationAcceptanceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"//?", "?\\n", "//\\n"})
+    void 비정상적_구분자_선언_구문_오류(String input) {
+        setInput(input);
+
+        assertThatThrownBy(ApplicationAcceptanceTest::run)
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 }
