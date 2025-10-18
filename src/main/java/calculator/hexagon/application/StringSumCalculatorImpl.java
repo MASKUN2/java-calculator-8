@@ -51,13 +51,9 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     }
 
     @Override
-    public void printWelcome() {
-        instructor.display();
-    }
-
-    @Override
     public void readInput() {
         this.result = 0;
+        instructor.display();
         this.input = stringInputReader.read();
     }
 

@@ -44,11 +44,13 @@ public class StringSumCalculatorImplTest {
 
     @Test
     void welcomeMessage가_보인다() {
-        calculator.printWelcome();
+        SystemInputTestHelper.setInput("");
+
+        calculator.readInput();
 
         String output = SystemOutputTestHelper.output();
 
-        assertThat(output).isEqualTo("덧셈할 문자열을 입력해 주세요.");
+        assertThat(output).contains("덧셈할 문자열을 입력해 주세요.");
     }
 
     @Test
