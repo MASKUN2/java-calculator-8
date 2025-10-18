@@ -62,3 +62,4 @@
 | 8  | 커스텀 구분자만 입력             | "//;\\n"                      | "결과 : 0"                 |      |        |
 | 9  | 사용할 수 없는 커스텀 구분자를 입력    | "//1\\n", "//.\\n", "//\n\\n" | IllegalArgumentException |      |        |
 | 10 | 양수 이며 정수가 아닌 값 입력       | "A,2,3", "1,?,3", "1.5,2,3"   | IllegalArgumentException |      |        |
+| 11 | 비정상적 구분자 선언 구문          | "//?" , "?\\n", "//\\n"       | IllegalArgumentException |      |        |
