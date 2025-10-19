@@ -8,12 +8,12 @@ import calculator.hexagon.domain.PositiveNumberValidator;
 import calculator.hexagon.domain.Splitter;
 import calculator.hexagon.domain.model.SeparatedInput;
 import calculator.hexagon.in.StringSumCalculator;
-import calculator.hexagon.out.CalculatorUi;
+import calculator.hexagon.out.InOutHandler;
 import java.util.List;
 import java.util.Optional;
 
 public class StringSumCalculatorImpl implements StringSumCalculator {
-    private final CalculatorUi ui;
+    private final InOutHandler ioHandler;
     private final CustomDelimiterDeclarer customDelimiterDeclarer;
     private final DelimiterValidator delimiterValidator;
     private final Splitter splitter;
@@ -25,7 +25,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     private int result = 0;
 
     public StringSumCalculatorImpl(
-            CalculatorUi ui,
+            InOutHandler ioHandler,
             CustomDelimiterDeclarer customDelimiterDeclarer,
             DelimiterValidator delimiterValidator,
             Splitter splitter,
@@ -33,7 +33,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
             PositiveNumberValidator positiveNumberValidator,
             Calculator calculator
     ) {
-        this.ui = ui;
+        this.ioHandler = ioHandler;
         this.customDelimiterDeclarer = customDelimiterDeclarer;
         this.delimiterValidator = delimiterValidator;
         this.splitter = splitter;
@@ -46,7 +46,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     @Override
     public void readInput() {
         this.result = 0;
-        this.input = ui.readInput();
+        this.input = ioHandler.readIn();
     }
 
     @Override
@@ -59,8 +59,8 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     }
 
     @Override
-    public void printResult() {
-        ui.printResult(result);
+    public void writeResult() {
+        ioHandler.writeOut(result);
     }
 
     private List<String> split(SeparatedInput separated) {

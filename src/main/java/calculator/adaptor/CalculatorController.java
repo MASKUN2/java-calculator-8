@@ -1,13 +1,13 @@
 package calculator.adaptor;
 
-import calculator.hexagon.out.CalculatorUi;
+import calculator.hexagon.out.InOutHandler;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
 
-public class CalculatorController implements CalculatorUi {
+public class CalculatorController implements InOutHandler {
 
     @Override
-    public String readInput() {
+    public String readIn() {
         try {
             displayInstruction();
             return Console.readLine();
@@ -19,7 +19,7 @@ public class CalculatorController implements CalculatorUi {
     }
 
     @Override
-    public void printResult(int result) {
+    public void writeOut(int result) {
         System.out.printf("결과 : %s", result);
     }
 

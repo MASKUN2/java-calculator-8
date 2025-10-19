@@ -64,7 +64,7 @@ public class StringSumCalculatorImplTest {
 
     @Test
     void 결과를_출력한다() {
-        calculator.printResult();
+        calculator.writeResult();
         String output = SystemOutputTestHelper.output();
 
         assertThat(output).isEqualTo("결과 : 0");

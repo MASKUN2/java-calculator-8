@@ -5,6 +5,6 @@ public interface StringSumCalculator {
 
     void sum();
 
-    void printResult();
+    void writeResult();
 
 }

@@ -32,7 +32,7 @@ public class CalculatorControllerTest {
         String input = "입력문샘플";
         setInput(input);
 
-        String result = controller.readInput();
+        String result = controller.readIn();
 
         assertThat(result).isEqualTo(input);
     }
@@ -42,7 +42,7 @@ public class CalculatorControllerTest {
         String input = "//;\\n1";
         setInput(input);
 
-        String result = controller.readInput();
+        String result = controller.readIn();
 
         assertThat(result).isEqualTo(input);
     }
@@ -52,7 +52,7 @@ public class CalculatorControllerTest {
         String input = "";
         setInput(input);
 
-        String result = controller.readInput();
+        String result = controller.readIn();
 
         assertThat(result).isEqualTo(input);
     }
@@ -60,13 +60,13 @@ public class CalculatorControllerTest {
     @Test
     void 설명을_출력한다() {
         setInput("");
-        controller.readInput();
+        controller.readIn();
         assertThat(output()).contains("덧셈할 문자열을 입력해 주세요.");
     }
 
     @Test
     void 결과를_포맷에_맞춰_출력한다() {
-        controller.printResult(123);
+        controller.writeOut(123);
         String output = output();
         assertThat(output).isEqualTo("결과 : 123");
     }

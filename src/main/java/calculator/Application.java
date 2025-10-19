@@ -8,6 +8,6 @@ public class Application {
         StringSumCalculator calculator = config.stringSumCalculator();
         calculator.readInput();
         calculator.sum();
-        calculator.printResult();
+        calculator.writeResult();
     }
 }
