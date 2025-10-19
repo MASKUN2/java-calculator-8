@@ -22,11 +22,14 @@ public class StringSumCalculatorImplTest {
     void setUp() {
         SystemOutputTestHelper.record();
 
-        calculator = new StringSumCalculatorImpl(
-                new CalculatorController(),
+        StringNumberSplitter splitter = new InputSplitter(
                 new CustomDelimiterDeclarer(),
                 new DelimiterValidator(),
-                new StringSplitter(),
+                new StringSplitter()
+        );
+        calculator = new StringSumCalculatorImpl(
+                new CalculatorController(),
+                splitter,
                 new IntegerParser(),
                 new PositiveIntegerValidator(),
                 new IntegerCalculator()

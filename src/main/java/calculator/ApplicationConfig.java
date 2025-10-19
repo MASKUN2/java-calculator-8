@@ -1,6 +1,8 @@
 package calculator;
 
 import calculator.adaptor.CalculatorController;
+import calculator.hexagon.application.InputSplitter;
+import calculator.hexagon.application.StringNumberSplitter;
 import calculator.hexagon.application.StringSumCalculatorImpl;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
 import calculator.hexagon.domain.DelimiterValidator;
@@ -18,12 +20,18 @@ public final class ApplicationConfig {
     public static StringSumCalculator stringSumCalculator() {
         return new StringSumCalculatorImpl(
                 new CalculatorController(),
-                new CustomDelimiterDeclarer(),
-                new DelimiterValidator(),
-                new StringSplitter(),
+                stringNumberSplitter(),
                 new IntegerParser(),
                 new PositiveIntegerValidator(),
                 new IntegerCalculator()
+        );
+    }
+
+    private static StringNumberSplitter stringNumberSplitter() {
+        return new InputSplitter(
+                new CustomDelimiterDeclarer(),
+                new DelimiterValidator(),
+                new StringSplitter()
         );
     }
 }
