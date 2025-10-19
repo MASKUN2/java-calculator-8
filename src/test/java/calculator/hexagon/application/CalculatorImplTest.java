@@ -5,12 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import calculator.adaptor.CalculatorController;
 import calculator.helper.SystemInputTestHelper;
 import calculator.helper.SystemOutputTestHelper;
-import calculator.hexagon.domain.CustomDelimiterDeclarer;
-import calculator.hexagon.domain.DelimiterValidator;
+import calculator.hexagon.domain.CustomDelimiterSplitLogic;
 import calculator.hexagon.domain.IntegerParser;
 import calculator.hexagon.domain.IntegerSumLogic;
 import calculator.hexagon.domain.PositiveIntegerValidator;
-import calculator.hexagon.domain.StringSplitter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,19 +20,13 @@ public class CalculatorImplTest {
     void setUp() {
         SystemOutputTestHelper.record();
 
-        StringNumberSplitter splitter = new InputSplitter(
-                new CustomDelimiterDeclarer(),
-                new DelimiterValidator(),
-                new StringSplitter()
-        );
-
         StringIntegerParserImpl integerParser = new StringIntegerParserImpl(
                 new IntegerParser(),
                 new PositiveIntegerValidator()
         );
 
         StringSumProcesserImpl newCalculator = new StringSumProcesserImpl(
-                splitter,
+                new CustomDelimiterSplitLogic(),
                 integerParser,
                 new IntegerSumLogic()
         );

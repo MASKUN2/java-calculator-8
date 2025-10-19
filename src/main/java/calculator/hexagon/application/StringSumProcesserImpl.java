@@ -1,20 +1,21 @@
 package calculator.hexagon.application;
 
+import calculator.hexagon.domain.SplitLogic;
 import calculator.hexagon.domain.SumLogic;
 import java.util.List;
 
 public class StringSumProcesserImpl implements StringSumProcessor {
-    private final StringNumberSplitter splitter;
+    private final SplitLogic splitLogic;
     private final StringIntegerParser stringIntegerParser;
     private final SumLogic sumLogic;
 
 
     public StringSumProcesserImpl(
-            StringNumberSplitter splitter,
+            SplitLogic splitLogic,
             StringIntegerParser stringIntegerParser,
             SumLogic sumLogic
     ) {
-        this.splitter = splitter;
+        this.splitLogic = splitLogic;
         this.stringIntegerParser = stringIntegerParser;
         this.sumLogic = sumLogic;
 
@@ -22,7 +23,7 @@ public class StringSumProcesserImpl implements StringSumProcessor {
 
     @Override
     public int parseAndSum(String input) throws IllegalArgumentException {
-        List<String> parts = splitter.split(input);
+        List<String> parts = splitLogic.split(input);
         List<Integer> integers = stringIntegerParser.parse(parts);
         return sumLogic.sum(integers);
     }
