@@ -33,7 +33,7 @@
 | 2  |       | 출력    | 안내 출력                 | display instruction         | "덧셈할 문자열을 입력해 주세요." 출력                        | 예          |
 | 3  |       | 입력    | 문자열 입력                | string input                |                                               | 예          |
 | 4  |       | 처리    | 입력 검증                 | error for wrong input       | IllegalArgumentException을 발생시킨 후 애플리케이션은 종료한다 | 예          |
-| 5  |       | 처리    | 구분자러 문자열 숫자 분리        | split string by delimiters  |                                               | 예          |
+| 5  |       | 처리    | 구분자로 문자열 숫자 분리        | split string by delimiters  |                                               | 예          |
 | 6  | 5     | 처리    | 기본 구분자 지원             | support default delimiters  | `,` 와 `:`                                     | 예          |
 | 7  | 5     | 처리    | 커스텀 구분자 선언 지원         | support custom delimiter    | 문자열 앞부분의 `//`와 `\n` 사이에 선언                    | 예          |
 | 8  |       | 처리    | 문자열 숫자 변환             | string to numbers parsing   |                                               | 예          |
