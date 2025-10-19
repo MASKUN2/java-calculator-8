@@ -2,6 +2,6 @@ package calculator.hexagon.domain;
 
 import java.util.List;
 
-public interface Calculator {
+public interface SumLogic {
     int sum(List<Integer> numbers);
 }

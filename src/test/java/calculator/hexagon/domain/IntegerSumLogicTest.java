@@ -1,18 +1,17 @@
 package calculator.hexagon.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class IntegerCalculatorTest {
-    private IntegerCalculator cal;
+public class IntegerSumLogicTest {
+    private IntegerSumLogic cal;
 
     @BeforeEach
     void setUp() {
-        this.cal = new IntegerCalculator();
+        this.cal = new IntegerSumLogic();
     }
 
     @Test

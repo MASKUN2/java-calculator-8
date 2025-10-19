@@ -2,7 +2,7 @@ package calculator.hexagon.domain;
 
 import java.util.List;
 
-public class IntegerCalculator implements Calculator {
+public class IntegerSumLogic implements SumLogic {
 
     @Override
     public int sum(List<Integer> numbers) {

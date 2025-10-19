@@ -7,16 +7,16 @@ import calculator.helper.SystemInputTestHelper;
 import calculator.helper.SystemOutputTestHelper;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
 import calculator.hexagon.domain.DelimiterValidator;
-import calculator.hexagon.domain.IntegerCalculator;
 import calculator.hexagon.domain.IntegerParser;
+import calculator.hexagon.domain.IntegerSumLogic;
 import calculator.hexagon.domain.PositiveIntegerValidator;
 import calculator.hexagon.domain.StringSplitter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CalculationServiceTest {
-    private CalculationService calculator;
+public class CalculatorImplTest {
+    private CalculatorImpl calculator;
 
     @BeforeEach
     void setUp() {
@@ -33,13 +33,13 @@ public class CalculationServiceTest {
                 new PositiveIntegerValidator()
         );
 
-        StringNumberCalculatorImpl newCalculator = new StringNumberCalculatorImpl(
+        StringSumProcesserImpl newCalculator = new StringSumProcesserImpl(
                 splitter,
                 integerParser,
-                new IntegerCalculator()
+                new IntegerSumLogic()
         );
 
-        calculator = new CalculationService(
+        calculator = new CalculatorImpl(
                 new CalculatorController(),
                 newCalculator
         );

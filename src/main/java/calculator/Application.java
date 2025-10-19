@@ -1,10 +1,10 @@
 package calculator;
 
-import calculator.hexagon.in.StringSumCalculator;
+import calculator.hexagon.in.Calculator;
 
 public class Application {
     public static void main(String[] args) {
-        StringSumCalculator calculator = ApplicationConfig.stringSumCalculator();
+        Calculator calculator = ApplicationConfig.calculator();
         calculator.readInput();
         calculator.sum();
         calculator.writeResult();

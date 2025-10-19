@@ -1,29 +1,29 @@
 package calculator.hexagon.application;
 
-import calculator.hexagon.domain.Calculator;
+import calculator.hexagon.domain.SumLogic;
 import java.util.List;
 
-public class StringNumberCalculatorImpl implements StringNumberCalculator {
+public class StringSumProcesserImpl implements StringSumProcessor {
     private final StringNumberSplitter splitter;
     private final StringIntegerParser stringIntegerParser;
-    private final Calculator calculator;
+    private final SumLogic sumLogic;
 
 
-    public StringNumberCalculatorImpl(
+    public StringSumProcesserImpl(
             StringNumberSplitter splitter,
             StringIntegerParser stringIntegerParser,
-            Calculator calculator
+            SumLogic sumLogic
     ) {
         this.splitter = splitter;
         this.stringIntegerParser = stringIntegerParser;
-        this.calculator = calculator;
+        this.sumLogic = sumLogic;
 
     }
 
     @Override
-    public int calculate(String input) throws IllegalArgumentException {
+    public int parseAndSum(String input) throws IllegalArgumentException {
         List<String> parts = splitter.split(input);
         List<Integer> integers = stringIntegerParser.parse(parts);
-        return calculator.sum(integers);
+        return sumLogic.sum(integers);
     }
 }

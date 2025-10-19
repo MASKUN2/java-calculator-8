@@ -1,6 +1,6 @@
 package calculator.hexagon.in;
 
-public interface StringSumCalculator {
+public interface Calculator {
     void readInput();
 
     void sum() throws IllegalArgumentException;

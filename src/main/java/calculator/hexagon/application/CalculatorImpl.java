@@ -1,21 +1,21 @@
 package calculator.hexagon.application;
 
-import calculator.hexagon.in.StringSumCalculator;
+import calculator.hexagon.in.Calculator;
 import calculator.hexagon.out.InOutHandler;
 
-public class CalculationService implements StringSumCalculator {
+public class CalculatorImpl implements Calculator {
     private final InOutHandler ioHandler;
-    private final StringNumberCalculator calculator;
+    private final StringSumProcessor processor;
 
     private String input = "";
     private int result = 0;
 
-    public CalculationService(
+    public CalculatorImpl(
             InOutHandler ioHandler,
-            StringNumberCalculator calculator
+            StringSumProcessor processor
     ) {
         this.ioHandler = ioHandler;
-        this.calculator = calculator;
+        this.processor = processor;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class CalculationService implements StringSumCalculator {
 
     @Override
     public void sum() throws IllegalArgumentException {
-        result = calculator.calculate(input);
+        result = processor.parseAndSum(input);
     }
 
     @Override
