@@ -8,14 +8,10 @@ public class CalculatorController implements InOutHandler {
 
     @Override
     public String readIn() {
-        try {
-            displayInstruction();
-            return Console.readLine();
-        } catch (NoSuchElementException e) {
-            return "";
-        } finally {
-            Console.close();
-        }
+        displayInstruction();
+        String input = read();
+        finishReading();
+        return input;
     }
 
     @Override
@@ -25,5 +21,17 @@ public class CalculatorController implements InOutHandler {
 
     private void displayInstruction() {
         System.out.println("덧셈할 문자열을 입력해 주세요.");
+    }
+
+    private String read() {
+        try {
+            return Console.readLine();
+        } catch (NoSuchElementException e) {
+            return "";
+        }
+    }
+
+    private static void finishReading() {
+        Console.close();
     }
 }
