@@ -1,7 +1,10 @@
 package calculator.hexagon.application;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.Result;
+
 public interface StringSumProcessor {
 
-    int parseAndSum(String input) throws IllegalArgumentException;
+    Result parseAndSum(Input input) throws IllegalArgumentException;
 
 }

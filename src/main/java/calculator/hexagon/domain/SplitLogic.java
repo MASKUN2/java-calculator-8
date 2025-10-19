@@ -1,9 +1,11 @@
 package calculator.hexagon.domain;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.SingleIntegerPart;
 import java.util.List;
 
 public interface SplitLogic {
 
-    List<String> split(String input) throws IllegalArgumentException;
+    List<SingleIntegerPart> split(Input input) throws IllegalArgumentException;
 
 }

@@ -1,5 +1,7 @@
 package calculator.hexagon.application;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.Result;
 import calculator.hexagon.in.Calculator;
 import calculator.hexagon.out.InOutHandler;
 
@@ -7,8 +9,8 @@ public class CalculatorImpl implements Calculator {
     private final InOutHandler ioHandler;
     private final StringSumProcessor processor;
 
-    private String input = "";
-    private int result = 0;
+    private Input input = Input.EMPTY;
+    private Result result = Result.ZERO;
 
     public CalculatorImpl(
             InOutHandler ioHandler,
@@ -20,7 +22,7 @@ public class CalculatorImpl implements Calculator {
 
     @Override
     public void readInput() {
-        this.result = 0;
+        this.result = Result.ZERO;
         this.input = ioHandler.readIn();
     }
 

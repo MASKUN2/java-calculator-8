@@ -1,10 +1,15 @@
 package calculator.hexagon.domain;
 
-import static calculator.hexagon.domain.model.Delimiter.DECLARE_PREFIX;
-import static calculator.hexagon.domain.model.Delimiter.DECLARE_SUFFIX;
-import static calculator.hexagon.domain.model.Delimiter.DEFAULT;
-import static calculator.hexagon.domain.model.Delimiter.FORBIDDEN;
+import static calculator.hexagon.domain.value.Delimiter.DECLARE_PREFIX;
+import static calculator.hexagon.domain.value.Delimiter.DECLARE_SUFFIX;
+import static calculator.hexagon.domain.value.Delimiter.DEFAULT;
 
+import calculator.hexagon.domain.value.Delimiter;
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.MultiIntegerPart;
+import calculator.hexagon.domain.value.Regex;
+import calculator.hexagon.domain.value.SingleIntegerPart;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,7 +26,7 @@ public class CustomDelimiterSplitLogic implements SplitLogic {
     }
 
     @Override
-    public List<String> split(String input) throws IllegalArgumentException {
+    public List<SingleIntegerPart> split(Input input) throws IllegalArgumentException {
         if (hasDeclaration(input)) {
             return splitByCustomDelimiter(input);
         }
@@ -29,88 +34,74 @@ public class CustomDelimiterSplitLogic implements SplitLogic {
         return defaultSplit(input);
     }
 
-    private boolean hasDeclaration(String input) {
-        return input.startsWith(DECLARE_PREFIX) && input.contains(DECLARE_SUFFIX);
+    private boolean hasDeclaration(Input input) {
+        final String value = input.value();
+        return value.startsWith(DECLARE_PREFIX) && value.contains(DECLARE_SUFFIX);
     }
 
-    private List<String> splitByCustomDelimiter(String input) {
-        String delimiter = extractCustomDelimiter(input);
-        check(delimiter);
-        String numbersPart = trimDeclaration(input);
-        return splitWithCustomDelimiter(numbersPart, delimiter);
+    private List<SingleIntegerPart> splitByCustomDelimiter(Input input) {
+        Delimiter delimiter = extractCustomDelimiter(input);
+        MultiIntegerPart multiIntegerPart = trimDeclaration(input);
+        return splitWithCustomDelimiter(multiIntegerPart, delimiter);
     }
 
-    private String extractCustomDelimiter(String declaration) {
+    private Delimiter extractCustomDelimiter(Input declaration) {
+        final String value = declaration.value();
+
         int startIndex = DECLARE_PREFIX.length();
-        int exclusiveEndIndex = declaration.lastIndexOf(DECLARE_SUFFIX);
-        return declaration.substring(startIndex, exclusiveEndIndex);
+        int exclusiveEndIndex = value.lastIndexOf(DECLARE_SUFFIX);
+        String sub = value.substring(startIndex, exclusiveEndIndex);
+
+        return Delimiter.of(sub);
     }
 
-    private void check(String target) {
-        noEmpty(target);
-        noInForbidden(target);
-        noNumeric(target);
 
-    }
+    private MultiIntegerPart trimDeclaration(Input input) {
+        final String value = input.value();
 
-    private void noEmpty(String target) {
-        if (target.isEmpty()) {
-            throw new IllegalArgumentException("사용할 수 없는 구분자 입니다 (빈문자열)");
-        }
-    }
-
-    private void noInForbidden(String target) {
-        for (String badToken : FORBIDDEN) {
-            if (target.contains(badToken)) {
-                throw new IllegalArgumentException("사용할 수 없는 구분자 입니다 :" + badToken);
-            }
-        }
-    }
-
-    private void noNumeric(String target) {
-        if (isNumeric(target)) {
-            throw new IllegalArgumentException("사용할 수 없는 구분자 입니다 (숫자): " + target);
-        }
-    }
-
-    private static boolean isNumeric(String target) {
-        try {
-            Double.parseDouble(target);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private String trimDeclaration(String input) {
-        int suffixIndex = input.lastIndexOf(DECLARE_SUFFIX);
+        int suffixIndex = value.lastIndexOf(DECLARE_SUFFIX);
         int exclusiveEndIndex = suffixIndex + DECLARE_SUFFIX.length();
-        return input.substring(exclusiveEndIndex);
+        String sub = value.substring(exclusiveEndIndex);
+
+        return MultiIntegerPart.of(sub);
     }
 
-    private List<String> defaultSplit(String input) {
-        String regex = getRegex(DEFAULT);
-        String[] parts = input.split(regex);
-        return List.of(parts);
+    private List<SingleIntegerPart> defaultSplit(Input input) {
+        final String value = input.value();
+
+        Regex regex = getRegex(DEFAULT);
+        String[] parts = value.split(regex.value());
+
+        return Arrays.stream(parts)
+                .map(SingleIntegerPart::new)
+                .toList();
     }
 
-    private List<String> splitWithCustomDelimiter(String input, String customDelimiter) {
-        String regex = extendRegex(customDelimiter);
-        String[] parts = input.split(regex);
-        return List.of(parts);
+    private List<SingleIntegerPart> splitWithCustomDelimiter(MultiIntegerPart input, Delimiter customDelimiter) {
+        final String value = input.value();
+
+        Regex regex = extendRegex(customDelimiter);
+        String[] parts = value.split(regex.value());
+
+        return Arrays.stream(parts)
+                .map(SingleIntegerPart::new)
+                .toList();
     }
 
-    private String extendRegex(String customDelimiter) {
-        Set<String> extended = new HashSet<>(DEFAULT);
+    private Regex extendRegex(Delimiter customDelimiter) {
+        Set<Delimiter> extended = new HashSet<>(DEFAULT);
         extended.add(customDelimiter);
         return getRegex(extended);
     }
 
-    private String getRegex(Set<String> delimiters) {
+    private Regex getRegex(Set<Delimiter> delimiters) {
         List<String> escaped = delimiters.stream()
+                .map(Delimiter::value)
                 .map(Pattern::quote)
                 .toList();
-        return String.join("|", escaped);
+        String joined = String.join("|", escaped);
+        return Regex.of(joined);
     }
+
 
 }

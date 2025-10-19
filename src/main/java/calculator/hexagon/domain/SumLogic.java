@@ -1,7 +1,9 @@
 package calculator.hexagon.domain;
 
+import calculator.hexagon.domain.value.ParsedInteger;
+import calculator.hexagon.domain.value.Result;
 import java.util.List;
 
 public interface SumLogic {
-    int sum(List<Integer> numbers);
+    Result sum(List<ParsedInteger> numbers);
 }

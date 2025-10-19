@@ -3,6 +3,10 @@ package calculator.hexagon.application;
 import calculator.hexagon.domain.NumberParser;
 import calculator.hexagon.domain.SplitLogic;
 import calculator.hexagon.domain.SumLogic;
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.ParsedInteger;
+import calculator.hexagon.domain.value.Result;
+import calculator.hexagon.domain.value.SingleIntegerPart;
 import java.util.List;
 
 public class StringSumProcesserImpl implements StringSumProcessor {
@@ -22,9 +26,9 @@ public class StringSumProcesserImpl implements StringSumProcessor {
     }
 
     @Override
-    public int parseAndSum(String input) throws IllegalArgumentException {
-        List<String> parts = splitLogic.split(input);
-        List<Integer> integers = numberParser.parse(parts);
+    public Result parseAndSum(Input input) throws IllegalArgumentException {
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<ParsedInteger> integers = numberParser.parse(parts);
         return sumLogic.sum(integers);
     }
 }

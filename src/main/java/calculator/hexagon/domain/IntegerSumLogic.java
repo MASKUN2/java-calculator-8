@@ -1,5 +1,7 @@
 package calculator.hexagon.domain;
 
+import calculator.hexagon.domain.value.ParsedInteger;
+import calculator.hexagon.domain.value.Result;
 import java.util.List;
 
 public class IntegerSumLogic implements SumLogic {
@@ -13,11 +15,11 @@ public class IntegerSumLogic implements SumLogic {
     }
 
     @Override
-    public int sum(List<Integer> numbers) {
+    public Result sum(List<ParsedInteger> numbers) {
         int result = 0;
-        for (Integer number : numbers) {
-            result += number;
+        for (ParsedInteger number : numbers) {
+            result += number.value();
         }
-        return result;
+        return Result.of(result);
     }
 }

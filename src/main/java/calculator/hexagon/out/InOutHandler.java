@@ -1,8 +1,11 @@
 package calculator.hexagon.out;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.Result;
+
 public interface InOutHandler {
 
-    String readIn();
+    Input readIn();
 
-    void writeOut(int result);
+    void writeOut(Result result);
 }

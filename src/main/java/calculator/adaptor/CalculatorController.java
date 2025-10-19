@@ -1,5 +1,7 @@
 package calculator.adaptor;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.Result;
 import calculator.hexagon.out.InOutHandler;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.NoSuchElementException;
@@ -15,16 +17,16 @@ public class CalculatorController implements InOutHandler {
     }
 
     @Override
-    public String readIn() {
+    public Input readIn() {
         displayInstruction();
-        String input = read();
+        String read = read();
         finishReading();
-        return input;
+        return Input.of(read);
     }
 
     @Override
-    public void writeOut(int result) {
-        System.out.printf("결과 : %s", result);
+    public void writeOut(Result result) {
+        System.out.printf("결과 : %s", result.value());
     }
 
     private void displayInstruction() {

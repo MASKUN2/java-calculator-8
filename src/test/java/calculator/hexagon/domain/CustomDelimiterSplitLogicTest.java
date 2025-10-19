@@ -3,7 +3,10 @@ package calculator.hexagon.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import calculator.hexagon.domain.value.Input;
+import calculator.hexagon.domain.value.SingleIntegerPart;
 import java.util.List;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 public class CustomDelimiterSplitLogicTest {
@@ -11,42 +14,64 @@ public class CustomDelimiterSplitLogicTest {
 
     @Test
     void 구분자선언이_없으면_숫자부문만_분리한다() {
-        String input = "1,2:3";
-        List<String> strings = splitLogic.split(input);
-        assertThat(strings).isEqualTo(List.of("1", "2", "3"));
+        Input input = Input.of("1,2:3");
+
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<String> values = parts.stream()
+                .map(SingleIntegerPart::value)
+                .toList();
+
+        assertThat(values).isEqualTo(List.of("1", "2", "3"));
     }
 
     @Test
     void 구분자선언이_있으면_모두_분리한다() {
-        String input = "//;\\n1,2:3";
-        List<String> strings = splitLogic.split(input);
-        assertThat(strings).isEqualTo(List.of("1", "2", "3"));
+        Input input = Input.of("//;\\n1,2:3");
+
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<String> values = parts.stream()
+                .map(SingleIntegerPart::value)
+                .toList();
+
+        assertThat(values).isEqualTo(List.of("1", "2", "3"));
     }
 
     @Test
     void 구분자선언만_있으면_구분자만_분리한다() {
-        String input = "//;\\n";
-        List<String> strings = splitLogic.split(input);
-        assertThat(strings).isEqualTo(List.of(""));
+        Input input = Input.of("//;\\n");
+
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<String> values = parts.stream()
+                .map(SingleIntegerPart::value)
+                .toList();
+
+        assertThat(values).isEqualTo(List.of(""));
     }
 
     @Test
     void 빈문자열_구분시_비어있음() {
-        String input = "";
-        List<String> strings = splitLogic.split(input);
-        assertThat(strings).isEqualTo(List.of(""));
+        Input input = Input.of("");
+        List<SingleIntegerPart> strings = splitLogic.split(input);
+
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<String> values = parts.stream()
+                .map(SingleIntegerPart::value)
+                .toList();
+
+        assertThat(values).isEqualTo(List.of(""));
     }
 
-    @Test
-    void 숫자분할된다() {
-        List<String> strings = splitLogic.split("1,2:3");
-        assertThat(strings).isEqualTo(List.of("1", "2", "3"));
-    }
 
     @Test
     void 구분자_추가된다() {
-        List<String> strings = splitLogic.split("//-\\n1,2:3-4");
-        assertThat(strings).isEqualTo(List.of("1", "2", "3", "4"));
+        Input input = Input.of("//-\\n1,2:3-4");
+
+        List<SingleIntegerPart> parts = splitLogic.split(input);
+        List<String> values = parts.stream()
+                .map(SingleIntegerPart::value)
+                .toList();
+
+        assertThat(values).isEqualTo(List.of("1", "2", "3", "4"));
     }
 
     @Test
@@ -54,7 +79,11 @@ public class CustomDelimiterSplitLogicTest {
         List<String> badTokens = List.of("\n", ".", "4", "");
 
         for (String bad : badTokens) {
-            assertThatThrownBy(() -> splitLogic.split("//" + bad + "\\n"))
+            ThrowingCallable throwingCallable = () -> {
+                Input input = Input.of("//" + bad + "\\n");
+                splitLogic.split(input);
+            };
+            assertThatThrownBy(throwingCallable)
                     .isInstanceOf(IllegalArgumentException.class);
         }
 
@@ -65,7 +94,10 @@ public class CustomDelimiterSplitLogicTest {
         List<String> goods = List.of(";", "@");
 
         for (String good : goods) {
-            splitLogic.split("//" + good + "\\n");
+            ThrowingCallable throwingCallable = () -> {
+                Input input = Input.of("//" + good + "\\n");
+                splitLogic.split(input);
+            };
         }
     }
 }
