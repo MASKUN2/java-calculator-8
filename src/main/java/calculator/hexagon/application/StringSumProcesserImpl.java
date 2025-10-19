@@ -10,7 +10,6 @@ public class StringSumProcesserImpl implements StringSumProcessor {
     private final NumberParser numberParser;
     private final SumLogic sumLogic;
 
-
     public StringSumProcesserImpl(
             SplitLogic splitLogic,
             NumberParser numberParser,
