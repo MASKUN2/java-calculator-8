@@ -10,9 +10,12 @@ import calculator.hexagon.domain.PositiveIntegerValidator;
 import calculator.hexagon.domain.StringSplitter;
 import calculator.hexagon.in.StringSumCalculator;
 
-public class ApplicationConfig {
+public final class ApplicationConfig {
 
-    public StringSumCalculator stringSumCalculator() {
+    private ApplicationConfig() {
+    }
+
+    public static StringSumCalculator stringSumCalculator() {
         return new StringSumCalculatorImpl(
                 new CalculatorController(),
                 new CustomDelimiterDeclarer(),
