@@ -1,8 +1,6 @@
 package calculator.hexagon.application;
 
 import calculator.hexagon.domain.Calculator;
-import calculator.hexagon.domain.NumberParser;
-import calculator.hexagon.domain.PositiveNumberValidator;
 import calculator.hexagon.in.StringSumCalculator;
 import calculator.hexagon.out.InOutHandler;
 import java.util.List;
@@ -10,8 +8,7 @@ import java.util.List;
 public class StringSumCalculatorImpl implements StringSumCalculator {
     private final InOutHandler ioHandler;
     private final StringNumberSplitter splitter;
-    private final NumberParser numberParser;
-    private final PositiveNumberValidator positiveNumberValidator;
+    private final StringIntegerParser stringIntegerParser;
     private final Calculator calculator;
 
     private String input = "";
@@ -20,14 +17,12 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     public StringSumCalculatorImpl(
             InOutHandler ioHandler,
             StringNumberSplitter splitter,
-            NumberParser numberParser,
-            PositiveNumberValidator positiveNumberValidator,
+            StringIntegerParser stringIntegerParser,
             Calculator calculator
     ) {
         this.ioHandler = ioHandler;
         this.splitter = splitter;
-        this.numberParser = numberParser;
-        this.positiveNumberValidator = positiveNumberValidator;
+        this.stringIntegerParser = stringIntegerParser;
         this.calculator = calculator;
 
     }
@@ -41,8 +36,7 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
     @Override
     public void sum() {
         List<String> parts = splitter.split(input);
-        List<Integer> integers = parse(parts);
-        validateNumber(integers);
+        List<Integer> integers = stringIntegerParser.parse(parts);
         result = calculator.sum(integers);
     }
 
@@ -51,17 +45,5 @@ public class StringSumCalculatorImpl implements StringSumCalculator {
         ioHandler.writeOut(result);
     }
 
-
-    private List<Integer> parse(List<String> parts) {
-        return parts.stream()
-                .map(numberParser::parse)
-                .toList();
-    }
-
-    private void validateNumber(List<Integer> integers) {
-        for (Integer number : integers) {
-            positiveNumberValidator.check(number);
-        }
-    }
 
 }

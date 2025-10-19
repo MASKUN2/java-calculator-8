@@ -2,6 +2,8 @@ package calculator;
 
 import calculator.adaptor.CalculatorController;
 import calculator.hexagon.application.InputSplitter;
+import calculator.hexagon.application.StringIntegerParser;
+import calculator.hexagon.application.StringIntegerParserImpl;
 import calculator.hexagon.application.StringNumberSplitter;
 import calculator.hexagon.application.StringSumCalculatorImpl;
 import calculator.hexagon.domain.CustomDelimiterDeclarer;
@@ -21,8 +23,7 @@ public final class ApplicationConfig {
         return new StringSumCalculatorImpl(
                 new CalculatorController(),
                 stringNumberSplitter(),
-                new IntegerParser(),
-                new PositiveIntegerValidator(),
+                stringIntegerParser(),
                 new IntegerCalculator()
         );
     }
@@ -32,6 +33,13 @@ public final class ApplicationConfig {
                 new CustomDelimiterDeclarer(),
                 new DelimiterValidator(),
                 new StringSplitter()
+        );
+    }
+
+    private static StringIntegerParser stringIntegerParser() {
+        return new StringIntegerParserImpl(
+                new IntegerParser(),
+                new PositiveIntegerValidator()
         );
     }
 }

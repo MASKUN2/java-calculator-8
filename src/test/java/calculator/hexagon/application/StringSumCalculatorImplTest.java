@@ -27,11 +27,16 @@ public class StringSumCalculatorImplTest {
                 new DelimiterValidator(),
                 new StringSplitter()
         );
+
+        StringIntegerParserImpl integerParser = new StringIntegerParserImpl(
+                new IntegerParser(),
+                new PositiveIntegerValidator()
+        );
+
         calculator = new StringSumCalculatorImpl(
                 new CalculatorController(),
                 splitter,
-                new IntegerParser(),
-                new PositiveIntegerValidator(),
+                integerParser,
                 new IntegerCalculator()
         );
     }
