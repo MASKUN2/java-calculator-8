@@ -14,7 +14,7 @@ public class IntegerParser implements NumberParser {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정수만 입력 가능합니다", e);
+            throw new IllegalArgumentException("사용할 수 없는 숫자 정수 문자열입니다." + input, e);
         }
     }
 }
