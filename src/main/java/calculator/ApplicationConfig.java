@@ -15,16 +15,16 @@ public final class ApplicationConfig {
 
     public static Calculator calculator() {
         return new CalculatorImpl(
-                new CalculatorController(),
+                CalculatorController.getInstance(),
                 getProcessor()
         );
     }
 
     private static StringSumProcesserImpl getProcessor() {
         return new StringSumProcesserImpl(
-                new CustomDelimiterSplitLogic(),
-                new IntegerParser(),
-                new IntegerSumLogic()
+                CustomDelimiterSplitLogic.getInstance(),
+                IntegerParser.getInstance(),
+                IntegerSumLogic.getInstance()
         );
     }
 

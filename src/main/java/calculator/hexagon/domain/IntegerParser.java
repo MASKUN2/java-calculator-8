@@ -3,6 +3,14 @@ package calculator.hexagon.domain;
 import java.util.List;
 
 public class IntegerParser implements NumberParser {
+    private static final IntegerParser INSTANCE = new IntegerParser();
+
+    public static IntegerParser getInstance() {
+        return INSTANCE;
+    }
+
+    private IntegerParser() {
+    }
 
     @Override
     public List<Integer> parse(List<String> parts) throws IllegalArgumentException {

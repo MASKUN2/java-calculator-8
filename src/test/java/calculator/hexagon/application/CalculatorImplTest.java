@@ -20,13 +20,13 @@ public class CalculatorImplTest {
         SystemOutputTestHelper.record();
 
         StringSumProcesserImpl newCalculator = new StringSumProcesserImpl(
-                new CustomDelimiterSplitLogic(),
-                new IntegerParser(),
-                new IntegerSumLogic()
+                CustomDelimiterSplitLogic.getInstance(),
+                IntegerParser.getInstance(),
+                IntegerSumLogic.getInstance()
         );
 
         calculator = new CalculatorImpl(
-                new CalculatorController(),
+                CalculatorController.getInstance(),
                 newCalculator
         );
     }

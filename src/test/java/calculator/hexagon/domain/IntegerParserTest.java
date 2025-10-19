@@ -4,16 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class IntegerParserTest {
-    private IntegerParser parser;
-
-    @BeforeEach
-    void setUp() {
-        this.parser = new IntegerParser();
-    }
+    private final IntegerParser parser = IntegerParser.getInstance();
 
     @Test
     void 숫자_변환에_성공() {

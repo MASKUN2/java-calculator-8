@@ -4,16 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CustomDelimiterSplitLogicTest {
-    private CustomDelimiterSplitLogic splitLogic;
-
-    @BeforeEach
-    void setUp() {
-        splitLogic = new CustomDelimiterSplitLogic();
-    }
+    private final CustomDelimiterSplitLogic splitLogic = CustomDelimiterSplitLogic.getInstance();
 
     @Test
     void 구분자선언이_없으면_숫자부문만_분리한다() {

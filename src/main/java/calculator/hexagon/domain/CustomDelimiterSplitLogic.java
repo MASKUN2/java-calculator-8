@@ -11,6 +11,14 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 public class CustomDelimiterSplitLogic implements SplitLogic {
+    private static final CustomDelimiterSplitLogic INSTANCE = new CustomDelimiterSplitLogic();
+
+    public static CustomDelimiterSplitLogic getInstance() {
+        return INSTANCE;
+    }
+
+    private CustomDelimiterSplitLogic() {
+    }
 
     @Override
     public List<String> split(String input) throws IllegalArgumentException {

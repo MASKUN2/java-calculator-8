@@ -3,16 +3,10 @@ package calculator.hexagon.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class IntegerSumLogicTest {
-    private IntegerSumLogic cal;
-
-    @BeforeEach
-    void setUp() {
-        this.cal = new IntegerSumLogic();
-    }
+    private final IntegerSumLogic cal = IntegerSumLogic.getInstance();
 
     @Test
     void 덧셈을한다_1더하기1은2() {

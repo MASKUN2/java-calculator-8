@@ -13,12 +13,11 @@ import org.junit.jupiter.api.Test;
 
 public class CalculatorControllerTest {
 
-    private CalculatorController controller;
+    private final CalculatorController controller = CalculatorController.getInstance();
 
     @BeforeEach
     void setUp() {
         record();
-        controller = new CalculatorController();
     }
 
     @AfterEach
