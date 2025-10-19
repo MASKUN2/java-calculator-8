@@ -1,6 +1,7 @@
 package calculator.hexagon.domain;
 
-public interface NumberParser {
+import java.util.List;
 
-    int parse(String input);
+public interface NumberParser {
+    List<Integer> parse(List<String> input) throws IllegalArgumentException;
 }

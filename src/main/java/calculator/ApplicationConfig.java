@@ -2,12 +2,10 @@ package calculator;
 
 import calculator.adaptor.CalculatorController;
 import calculator.hexagon.application.CalculatorImpl;
-import calculator.hexagon.application.StringIntegerParserImpl;
 import calculator.hexagon.application.StringSumProcesserImpl;
 import calculator.hexagon.domain.CustomDelimiterSplitLogic;
 import calculator.hexagon.domain.IntegerParser;
 import calculator.hexagon.domain.IntegerSumLogic;
-import calculator.hexagon.domain.PositiveIntegerValidator;
 import calculator.hexagon.in.Calculator;
 
 public final class ApplicationConfig {
@@ -25,15 +23,9 @@ public final class ApplicationConfig {
     private static StringSumProcesserImpl getProcessor() {
         return new StringSumProcesserImpl(
                 new CustomDelimiterSplitLogic(),
-                getStringIntegerParser(),
+                new IntegerParser(),
                 new IntegerSumLogic()
         );
     }
 
-    private static StringIntegerParserImpl getStringIntegerParser() {
-        return new StringIntegerParserImpl(
-                new IntegerParser(),
-                new PositiveIntegerValidator()
-        );
-    }
 }

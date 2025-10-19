@@ -8,7 +8,6 @@ import calculator.helper.SystemOutputTestHelper;
 import calculator.hexagon.domain.CustomDelimiterSplitLogic;
 import calculator.hexagon.domain.IntegerParser;
 import calculator.hexagon.domain.IntegerSumLogic;
-import calculator.hexagon.domain.PositiveIntegerValidator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,14 +19,9 @@ public class CalculatorImplTest {
     void setUp() {
         SystemOutputTestHelper.record();
 
-        StringIntegerParserImpl integerParser = new StringIntegerParserImpl(
-                new IntegerParser(),
-                new PositiveIntegerValidator()
-        );
-
         StringSumProcesserImpl newCalculator = new StringSumProcesserImpl(
                 new CustomDelimiterSplitLogic(),
-                integerParser,
+                new IntegerParser(),
                 new IntegerSumLogic()
         );
 
