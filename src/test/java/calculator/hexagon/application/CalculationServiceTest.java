@@ -15,8 +15,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class StringSumCalculatorImplTest {
-    private StringSumCalculatorImpl calculator;
+public class CalculationServiceTest {
+    private CalculationService calculator;
 
     @BeforeEach
     void setUp() {
@@ -33,11 +33,15 @@ public class StringSumCalculatorImplTest {
                 new PositiveIntegerValidator()
         );
 
-        calculator = new StringSumCalculatorImpl(
-                new CalculatorController(),
+        StringNumberCalculatorImpl newCalculator = new StringNumberCalculatorImpl(
                 splitter,
                 integerParser,
                 new IntegerCalculator()
+        );
+
+        calculator = new CalculationService(
+                new CalculatorController(),
+                newCalculator
         );
     }
 
