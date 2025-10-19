@@ -1,11 +1,12 @@
 package calculator.hexagon.domain;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringSplitterTest {
     private StringSplitter splitter;
@@ -64,5 +65,19 @@ public class StringSplitterTest {
         assertThat(result.get(1)).isEqualTo("2");
         assertThat(result.get(2)).isEqualTo("3");
 
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"?", "*", "|", "^", "("})
+    void 커스텀_구분자가_여러_특수문자인_경우_잘_처리한다(String specialCharDelimiter) {
+        String input = "1,2:3" + specialCharDelimiter + "4";
+
+        List<String> result = splitter.splitWithCustomDelimiter(input, specialCharDelimiter);
+
+        assertThat(result.size()).isEqualTo(4);
+        assertThat(result.get(0)).isEqualTo("1");
+        assertThat(result.get(1)).isEqualTo("2");
+        assertThat(result.get(2)).isEqualTo("3");
+        assertThat(result.get(3)).isEqualTo("4");
     }
 }

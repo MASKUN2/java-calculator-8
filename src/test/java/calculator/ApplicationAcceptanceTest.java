@@ -1,16 +1,18 @@
 package calculator;
 
+import static calculator.helper.SystemInputTestHelper.restore;
+import static calculator.helper.SystemInputTestHelper.setInput;
+import static calculator.helper.SystemOutputTestHelper.finish;
+import static calculator.helper.SystemOutputTestHelper.output;
+import static calculator.helper.SystemOutputTestHelper.record;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import static calculator.helper.SystemInputTestHelper.restore;
-import static calculator.helper.SystemInputTestHelper.setInput;
-import static calculator.helper.SystemOutputTestHelper.*;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ApplicationAcceptanceTest {
     @BeforeEach
@@ -111,6 +113,15 @@ public class ApplicationAcceptanceTest {
 
         assertThatThrownBy(ApplicationAcceptanceTest::run)
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"?", "*", "|", "^", "("})
+    void 기타_특수문자_커스텀_사용_가능(String delimiter) {
+        String input = String.format("//%s\\n1,2:3%s4", delimiter, delimiter);
+        setInput(input);
+        run();
+        assertThat(output()).contains("결과 : 10");
     }
 
 
