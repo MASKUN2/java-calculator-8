@@ -32,12 +32,12 @@
 | 1  |       | 통합    | 문자열 덧셈 계산기            | string sum calculator       | application                                   | 예          |
 | 2  |       | 출력    | 안내 출력                 | display instruction         | "덧셈할 문자열을 입력해 주세요." 출력                        | 예          |
 | 3  |       | 입력    | 문자열 입력                | string input                |                                               | 예          |
-| 4  |       | 처리    | 입력 검증                 | error for wrong input       | IllegalArgumentException을 발생시킨 후 애플리케이션은 종료한다 | 예          |
+| 4  |       | 처리    | 입력 검증                 | validate input              | IllegalArgumentException을 발생시킨 후 애플리케이션은 종료한다 | 예          |
 | 5  |       | 처리    | 구분자로 문자열 숫자 분리        | split string by delimiters  |                                               | 예          |
 | 6  | 5     | 처리    | 기본 구분자 지원             | support default delimiters  | `,` 와 `:`                                     | 예          |
 | 7  | 5     | 처리    | 커스텀 구분자 선언 지원         | support custom delimiter    | 문자열 앞부분의 `//`와 `\n` 사이에 선언                    | 예          |
-| 8  |       | 처리    | 문자열 숫자 변환             | string to numbers parsing   |                                               | 예          |
-| 9  |       | 계산    | 숫자 덧셈                 | sum numbers                 |                                               | 예          |
+| 8  |       | 처리    | 문자열 정수 변환             | string to Integer parsing   |                                               | 예          |
+| 9  |       | 계산    | 숫자 덧셈                 | sum Integers                |                                               | 예          |
 | 10 |       | 출력    | 결과를 출력하기              | print result                | 정해진 포맷으로 계산 결과를 출력한다                          | 예          |
 | 12 | 4     | 오류    | 숫자가 아닌 입력에 대한 오류      | error for non-numeric       |                                               | 예          |
 | 11 | 4     | 제약조건  | 양수가 아닌 숫자에 대한 오류      | error for negative          |                                               | 예          |
@@ -64,3 +64,77 @@
 | 10 | 양수 이며 정수가 아닌 값 입력       | "A,2,3", "1,?,3", "1.5,2,3"                     | IllegalArgumentException | 예    |        |
 | 11 | 비정상적 구분자 선언 구문          | "//?" , "?\\n", "//\\n"                         | IllegalArgumentException | 예    |        |
 | 12 | 기타 특수문자 커스텀 구분자로 사용     | "//%s\\n1,2:3%s4" 에 "?", "*", "\|", "^", "(" 대입 | "결과 : 10"                | 예    |        |
+
+---
+
+### 클래스 다이어그램
+
+```mermaid
+---
+config:
+  layout: dagre
+title: 문자열 덧셈 계산기
+---
+classDiagram
+    direction TB
+    namespace hexagon {
+        class CalculatorImpl {
+            -Input input
+            -Result result
+        }
+        class StringSumProcessor {
+            <<interface>>
+            Result parseAndSum(Input input)
+        }
+        class DelimitedStringSumProcesser {
+        }
+        class DelimiterSplitter {
+            <<interface>>
+            List~SingleIntegerPart~ split(Input input)
+        }
+        class IntegerSumProcessor {
+            <<interface>>
+            Result sum(List~ParsedInteger~ numbers)
+        }
+        class IntegerParser {
+            <<interface>>
+            List~ParsedInteger~parse(List~SingleIntegerPart~ parts)
+        }
+        class Calculator {
+            <<interface>>
+            void readInput()
+            void sum()
+            void writeResult()
+        }
+        class InOutHandler {
+            <<interface>>
+            Input readIn()
+            void writeOut(Result result)
+        }
+        class IntegerSumLogic {
+        }
+        class StringIntegerParser {
+        }
+        class CustomDelimiterSplitter {
+        }
+    }
+    class Application {
+        void main(String[] args)
+    }
+    class UserInOutHandler {
+    }
+
+    Calculator <|.. CalculatorImpl
+    InOutHandler <-- CalculatorImpl
+    CalculatorImpl --> StringSumProcessor
+    StringSumProcessor <|.. DelimitedStringSumProcesser
+    DelimitedStringSumProcesser --> DelimiterSplitter
+    DelimitedStringSumProcesser --> IntegerParser
+    DelimitedStringSumProcesser --> IntegerSumProcessor
+    Application --> Calculator
+    UserInOutHandler ..|> InOutHandler
+    IntegerSumProcessor <|.. IntegerSumLogic
+    IntegerParser <|.. StringIntegerParser
+    DelimiterSplitter <|.. CustomDelimiterSplitter
+
+```
