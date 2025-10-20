@@ -2,12 +2,12 @@ package calculator.hexagon.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import calculator.adaptor.CalculatorController;
+import calculator.adaptor.UserInOutHandler;
 import calculator.helper.SystemInputTestHelper;
 import calculator.helper.SystemOutputTestHelper;
-import calculator.hexagon.domain.CustomDelimiterSplitLogic;
-import calculator.hexagon.domain.IntegerParser;
+import calculator.hexagon.domain.CustomDelimiterSplitter;
 import calculator.hexagon.domain.IntegerSumLogic;
+import calculator.hexagon.domain.StringIntegerParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,15 +19,15 @@ public class CalculatorImplTest {
     void setUp() {
         SystemOutputTestHelper.record();
 
-        StringSumProcesserImpl newCalculator = new StringSumProcesserImpl(
-                CustomDelimiterSplitLogic.getInstance(),
-                IntegerParser.getInstance(),
+        DelimitedStringSumProcesser stringSumProcesser = new DelimitedStringSumProcesser(
+                CustomDelimiterSplitter.getInstance(),
+                StringIntegerParser.getInstance(),
                 IntegerSumLogic.getInstance()
         );
 
         calculator = new CalculatorImpl(
-                CalculatorController.getInstance(),
-                newCalculator
+                UserInOutHandler.getInstance(),
+                stringSumProcesser
         );
     }
 
@@ -41,7 +41,6 @@ public class CalculatorImplTest {
         SystemInputTestHelper.setInput("");
 
         calculator.readInput();
-
         String output = SystemOutputTestHelper.output();
 
         assertThat(output).contains("덧셈할 문자열을 입력해 주세요.");

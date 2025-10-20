@@ -4,7 +4,7 @@ import calculator.hexagon.domain.value.ParsedInteger;
 import calculator.hexagon.domain.value.Result;
 import java.util.List;
 
-public class IntegerSumLogic implements SumLogic {
+public class IntegerSumLogic implements IntegerSumProcessor {
     private static final IntegerSumLogic INSTANCE = new IntegerSumLogic();
 
     public static IntegerSumLogic getInstance() {

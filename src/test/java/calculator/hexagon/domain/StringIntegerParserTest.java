@@ -8,8 +8,8 @@ import calculator.hexagon.domain.value.SingleIntegerPart;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-public class IntegerParserTest {
-    private final IntegerParser parser = IntegerParser.getInstance();
+public class StringIntegerParserTest {
+    private final StringIntegerParser parser = StringIntegerParser.getInstance();
 
     @Test
     void 숫자_변환에_성공() {

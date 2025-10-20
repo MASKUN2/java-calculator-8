@@ -1,11 +1,11 @@
 package calculator;
 
-import calculator.adaptor.CalculatorController;
+import calculator.adaptor.UserInOutHandler;
 import calculator.hexagon.application.CalculatorImpl;
-import calculator.hexagon.application.StringSumProcesserImpl;
-import calculator.hexagon.domain.CustomDelimiterSplitLogic;
-import calculator.hexagon.domain.IntegerParser;
+import calculator.hexagon.application.DelimitedStringSumProcesser;
+import calculator.hexagon.domain.CustomDelimiterSplitter;
 import calculator.hexagon.domain.IntegerSumLogic;
+import calculator.hexagon.domain.StringIntegerParser;
 import calculator.hexagon.in.Calculator;
 
 public final class ApplicationConfig {
@@ -15,15 +15,15 @@ public final class ApplicationConfig {
 
     public static Calculator calculator() {
         return new CalculatorImpl(
-                CalculatorController.getInstance(),
+                UserInOutHandler.getInstance(),
                 getProcessor()
         );
     }
 
-    private static StringSumProcesserImpl getProcessor() {
-        return new StringSumProcesserImpl(
-                CustomDelimiterSplitLogic.getInstance(),
-                IntegerParser.getInstance(),
+    private static DelimitedStringSumProcesser getProcessor() {
+        return new DelimitedStringSumProcesser(
+                CustomDelimiterSplitter.getInstance(),
+                StringIntegerParser.getInstance(),
                 IntegerSumLogic.getInstance()
         );
     }

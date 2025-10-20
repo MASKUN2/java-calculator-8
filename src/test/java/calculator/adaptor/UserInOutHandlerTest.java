@@ -12,9 +12,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CalculatorControllerTest {
+public class UserInOutHandlerTest {
 
-    private final CalculatorController controller = CalculatorController.getInstance();
+    private final UserInOutHandler controller = UserInOutHandler.getInstance();
 
     @BeforeEach
     void setUp() {

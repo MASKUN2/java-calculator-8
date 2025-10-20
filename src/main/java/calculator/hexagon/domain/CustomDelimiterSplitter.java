@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-public class CustomDelimiterSplitLogic implements SplitLogic {
-    private static final CustomDelimiterSplitLogic INSTANCE = new CustomDelimiterSplitLogic();
+public class CustomDelimiterSplitter implements DelimiterSplitter {
+    private static final CustomDelimiterSplitter INSTANCE = new CustomDelimiterSplitter();
 
-    public static CustomDelimiterSplitLogic getInstance() {
+    public static CustomDelimiterSplitter getInstance() {
         return INSTANCE;
     }
 
-    private CustomDelimiterSplitLogic() {
+    private CustomDelimiterSplitter() {
     }
 
     @Override

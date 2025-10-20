@@ -9,8 +9,8 @@ import java.util.List;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
-public class CustomDelimiterSplitLogicTest {
-    private final CustomDelimiterSplitLogic splitLogic = CustomDelimiterSplitLogic.getInstance();
+public class CustomDelimiterSplitterTest {
+    private final CustomDelimiterSplitter splitLogic = CustomDelimiterSplitter.getInstance();
 
     @Test
     void 구분자선언이_없으면_숫자부문만_분리한다() {

@@ -4,6 +4,6 @@ import calculator.hexagon.domain.value.ParsedInteger;
 import calculator.hexagon.domain.value.Result;
 import java.util.List;
 
-public interface SumLogic {
+public interface IntegerSumProcessor {
     Result sum(List<ParsedInteger> numbers);
 }

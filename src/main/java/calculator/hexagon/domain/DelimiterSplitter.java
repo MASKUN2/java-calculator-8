@@ -4,7 +4,7 @@ import calculator.hexagon.domain.value.Input;
 import calculator.hexagon.domain.value.SingleIntegerPart;
 import java.util.List;
 
-public interface SplitLogic {
+public interface DelimiterSplitter {
 
     List<SingleIntegerPart> split(Input input) throws IllegalArgumentException;
 

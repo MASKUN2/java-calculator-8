@@ -18,7 +18,7 @@ public record Delimiter(String value) {
 
     private void check(String target) {
         noEmpty(target);
-        noInForbidden(target);
+        notInForbidden(target);
         noNumeric(target);
 
     }
@@ -29,7 +29,7 @@ public record Delimiter(String value) {
         }
     }
 
-    private void noInForbidden(String target) {
+    private void notInForbidden(String target) {
         for (String bad : FORBIDDEN) {
             if (target.contains(bad)) {
                 throw new IllegalArgumentException("사용할 수 없는 구분자 입니다 :" + bad);
